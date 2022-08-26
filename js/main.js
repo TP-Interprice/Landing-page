@@ -306,7 +306,8 @@
 // console.log($('.form-res div'))
 
 var formRes = function() {
-
+	var modal = document.getElementById("myModals");
+	
 	$('.form-res').on('submit', function(event){
 		event.preventDefault();
 		if (event.target[0].value.length > 0
@@ -326,20 +327,34 @@ var formRes = function() {
 				  //   console.log(url)
 				      async function fetchAsync(url) {
 					        let response = await fetch(url);
-					        // console.log(response,"1-si")
 					        let data = await response.json();
-					      // console.log(data,"2-si")
+							
 					        return data;
-					  
-					      }
-					      fetchAsync(url);
-					  event.target[0].value = ""
-					  event.target[1].value = ""
-					  event.target[2].value = ""
-
+							
+						}
+						fetchAsync(url);
+						event.target[0].value = ""
+						event.target[1].value = ""
+						event.target[2].value = ""
+						
+						
+						modal.style.display = "block";
+						
 		}
-		else console.log('kiritilsin hammasi!')
+		else{
+		alert('Уважаемый пассажир, вы ввели не все символы')
+	}
 		
 	});
+		var span = document.querySelector(".closeS");
+		span.onclick = function() {
+		modal.style.display = "none";
+		}
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	
 };
 formRes()
