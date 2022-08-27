@@ -310,41 +310,21 @@ var formRes = function() {
 	
 	$('.form-res').on('submit', function(event){
 		event.preventDefault();
-		if (event.target[0].value.length > 0
-			&& event.target[1].value.length > 0   && event.target[2].value.length > 0
-			  ){
-				//   console.log(event.target[1],event.target[0],event.target[2] )
-				  
-				  let botMessege = `
-				  Salom, Yangi Xabar!😊%0A
-				  Ismi 👤: ${event.target[1].value}%0A
-				  Raqam ☎: ${event.target[2].value}%0A 
-				  Email 📧: ${event.target[0].value}%0A 
-				  `;
-				  console.log(botMessege)
-				  
-				      let url =`https://api.telegram.org/bot5134537665:AAF6R-HCE6jj1sdO6puJqZS3o89s7djCsmQ/sendMessage?chat_id=330177333&text=${botMessege}`;
-				  //   console.log(url)
-				      async function fetchAsync(url) {
-					        let response = await fetch(url);
-					        let data = await response.json();
-							
-					        return data;
-							
-						}
-						fetchAsync(url);
-						event.target[0].value = ""
-						event.target[1].value = ""
-						event.target[2].value = ""
+				let body = "Ismi 👤: " + event.target[1].value + " <br/> Raqam ☎: " + event.target[2].value + " <br/> Email 📧: " + event.target[0].value + " ";
+				Email.send({
+					SecureToken : "5f3514c0-31e9-4f89-b1c6-12319904d6aa",
+					To : "azimov_trevels@mail.ru",
+					From : event.target[1].value,
+					Subject : "Salom sizga yangi zayavka keldi!",
+					Body : body
+				}).then(
+				  message => alert(message)
+				);
+					event.target[0].value = ""
+					event.target[1].value = ""
+					event.target[2].value = ""
 						
-						
-						modal.style.display = "block";
-						
-		}
-		else{
-		alert('Уважаемый пассажир, вы ввели не все символы')
-	}
-		
+					modal.style.display = "block";	
 	});
 		var span = document.querySelector(".closeS");
 		span.onclick = function() {
